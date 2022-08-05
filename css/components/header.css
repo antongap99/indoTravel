@@ -36,9 +36,9 @@
     border-radius: 20px 0;
     opacity: 0;
     z-index: -1;
-    -webkit-transition: 0.5s;
-    -o-transition: 0.5s;
-    transition: 0.5s;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
 }
 
 .header__menu_active {
