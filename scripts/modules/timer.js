@@ -1,5 +1,26 @@
 
+const createTimer = () => {
+    const plaginTimer = document.querySelector('.hero__timer');
+
+    plaginTimer.insertAdjacentHTML('afterbegin', `<p class="timer__title">До конца акции осталось:</p>
+    <p class="timer__item timer__item_days">
+      <span class="timer__count timer__count_days">2</span>
+      <span class="timer__units timer__units_days">дня</span></p>
+    <p class="timer__item timer__item_hours">
+      <span class="timer__count timer__count_hours">05</span>
+      <span class="timer__units timer__units_hours">часов</span></p>
+    <p class="timer__item timer__item_minutes">
+      <span class="timer__count timer__count_minutes">12</span>
+      <span class="timer__units timer__units_minutes">минут</span></p>`);
+}
+
+
+
+
 const timer = (deadline , timerWrapper) => {
+    
+
+
     const timerCountDays = document.querySelector('.timer__count_days');
     const timerCountHours = document.querySelector('.timer__count_hours');
     const timerCountMinutes = document.querySelector('.timer__count_minutes');
@@ -165,21 +186,17 @@ const timer = (deadline , timerWrapper) => {
 }
 
 const startTimer = () => {
+    createTimer();
+
     const timerWrapper = document.querySelector('.timer');
     try {
         timer(timerWrapper.dataset.timerDeadline, timerWrapper);
     } catch (error) {
         
     }
-   
-
-
-    
-
-   
 }
 
-startTimer();
+
 
 
 export default {startTimer};
