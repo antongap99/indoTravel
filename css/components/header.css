@@ -1,0 +1,82 @@
+.header {
+    min-width: 320px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 54px 0 87px;
+    background: -o-linear-gradient(top, rgba(0, 0, 0, 0.67) 4%, rgba(0, 0, 0, 0) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(4%, rgba(0, 0, 0, 0.67)), to(rgba(0, 0, 0, 0)));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.67) 4%, rgba(0, 0, 0, 0) 100%);
+}
+
+.header__container {
+    position: relative;
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.header__menu {
+    position: absolute;
+    right: 95px;
+    top: 40px;
+    padding: 30px 35px;
+    color: #fff;
+    background-color: #FCB500;
+    -webkit-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    border-radius: 20px 0;
+    opacity: 0;
+    z-index: -1;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+
+.header__menu_active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.header__menu-button {
+    width: 35px;
+    height: 16px;
+    background: url("../../img/hero/menu.svg") center/contain no-repeat;
+    -webkit-transition: -webkit-transform .3s ease-in;
+    transition: -webkit-transform .3s ease-in;
+    -o-transition: transform .3s ease-in;
+    transition: transform .3s ease-in;
+    transition: transform .3s ease-in, -webkit-transform .3s ease-in;
+}
+
+.header__menu-button:focus,
+.header__menu-button:active {
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.header__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.header__link {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+}

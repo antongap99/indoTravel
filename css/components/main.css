@@ -1,0 +1,157 @@
+* {
+    outline: none;
+}
+
+html {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    -webkit-box-sizing: inherit;
+    box-sizing: inherit;
+}
+
+body {
+    min-width: 320px;
+    font-family: "Nunito", sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: #303030;
+}
+
+a {
+    position: relative;
+    color: inherit;
+    text-decoration: none;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+a:after {
+    position: absolute;
+    content: "";
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 0;
+    background-color: #fff;
+    -webkit-transition: 0.5s;
+    -o-transition: 0.5s;
+    transition: 0.5s;
+}
+
+a:focus,
+a:active {
+    opacity: 0.7;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+picture {
+    display: block;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+.container {
+    max-width: 1300px;
+    padding: 0 60px;
+    margin: 0 auto;
+}
+
+.section {
+    padding: 150px 0;
+}
+
+.section__title {
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 150%;
+    margin-bottom: 60px;
+}
+
+.section__text_big {
+    font-family: Merriweather;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 150%;
+    letter-spacing: 0.02em;
+    max-width: 580px;
+    margin-bottom: 80px;
+}
+
+.section__text_small {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 150%;
+}
+
+.logo {
+    width: 176px;
+    height: 34px;
+}
+
+.button {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 150%;
+    color: #fff;
+    background-color: #FCB500;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+    border: 2px solid transparent;
+}
+
+.button:focus {
+    background-color: #F3C858;
+    border: 2px solid #C2900F;
+}
+
+.button:active {
+    background-color: #D09600;
+}
+
+.button:disabled {
+    background-color: #AFAFAF;
+}
+
+.swiper-pagination-bullet {
+    width: 4px !important;
+    height: 4px !important;
+    background-color: #fff;
+    opacity: 1;
+    margin: 0 3px !important;
+}
+
+.swiper-pagination-bullet-active {
+    width: 12px !important;
+    background-color: #FCB500;
+    border-radius: 10px;
+}

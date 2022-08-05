@@ -1,0 +1,111 @@
+
+.travel {
+    padding-top: 0;
+}
+
+.travel__container {
+    background: url("../../img/travel/map.svg") bottom 60px right 60px/480px 410px no-repeat;
+}
+
+.travel__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.travel__accordion {
+    position: relative;
+    max-width: 580px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    gap: 38px;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 1;
+    grid-column: 1/2;
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 1;
+    grid-row: 1/2;
+}
+
+.travel__accordion:before {
+    position: absolute;
+    content: "";
+    top: 16px;
+    left: 8px;
+    width: 2px;
+    height: calc(100% - 24px);
+    background-color: #FCB500;
+}
+
+.travel__item {
+    position: relative;
+    cursor: pointer;
+    padding-left: 100px;
+    -webkit-transition: padding-left .36s ease-in;
+    -o-transition: padding-left .36s ease-in;
+    transition: padding-left .36s ease-in;
+}
+
+.travel__item_active {
+    padding-left: 110px;
+}
+
+.travel__item:before {
+    position: absolute;
+    content: "";
+    top: 16px;
+    left: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background-color: #FCB500;
+    border-radius: 50%;
+    -webkit-transition: 0.2s;
+    -o-transition: 0.2s;
+    transition: 0.2s;
+}
+
+.travel__item_active:before {
+    -webkit-transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    transform: scale(1.2);
+    top: 10px;
+}
+
+.travel__item-title {
+    text-align: left;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    padding: 0;
+}
+
+.travel__item-text-wrapper {
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height .4s ease-in-out;
+    -o-transition: height .4s ease-in-out;
+    transition: height .4s ease-in-out;
+}
+
+.travel__item_active .travel__item-text-wrapper {
+    position: static;
+    height: auto;
+}
+
+.travel__item-text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 150%;
+    padding: 20px 0;
+}

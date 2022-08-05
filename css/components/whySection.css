@@ -1,0 +1,87 @@
+
+
+.why {
+    padding-bottom: 75px;
+}
+
+.why__list {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    row-gap: 57px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.why__item {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    max-width: 380px;
+    padding-top: 64px;
+}
+
+.why__item:after {
+    position: absolute;
+    content: "";
+    left: 17px;
+    top: 7px;
+    width: 40px;
+    height: 40px;
+}
+
+.why__item:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #FCB500;
+}
+
+.why__item:nth-child(1):after {
+    background: url("../../img/why/compass.svg") bottom right/contain no-repeat;
+}
+
+.why__item:nth-child(2):after {
+    background: url("../../img/why/suitcase.svg") bottom right/contain no-repeat;
+}
+
+.why__item:nth-child(3):after {
+    background: url("../../img/why/shield.svg") bottom right/contain no-repeat;
+}
+
+.why__item:nth-child(4):after {
+    background: url("../../img/why/meds.svg") bottom right/contain no-repeat;
+}
+
+.why__item:nth-child(5):after {
+    background: url("../../img/why/pacifier.svg") bottom right/contain no-repeat;
+}
+
+.why__item:nth-child(6):after {
+    background: url("../../img/why/food.svg") bottom right/contain no-repeat;
+}
+
+.why__item-title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 150%;
+    margin-bottom: 20px;
+}
+
+.why__item-text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 150%;
+}

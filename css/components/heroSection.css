@@ -1,0 +1,75 @@
+
+.hero {
+    padding: 192px 0 200px;
+    background: url("../../img/hero/background.jpg") center/cover no-repeat;
+    color: #fff;
+}
+
+.hero__content {
+    padding: 0 55px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 90px 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    -ms-grid-rows: auto 66px auto 66px auto;
+    grid-template-areas: "wrap wrap" "text timer" ". btn";
+    gap: 66px 90px;
+}
+
+.hero__timer {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+    grid-area: timer;
+}
+
+.hero__wrapper-title {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 3;
+    grid-area: wrap;
+    -ms-grid-column-align: center;
+    justify-self: center;
+}
+
+.hero__subtitle {
+    font-family: Merriweather, serif;
+    font-size: 40px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    padding-left: 80px;
+}
+
+.hero__title {
+    font-weight: 300;
+    font-size: 200px;
+    line-height: 200px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.hero__text {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+    grid-area: text;
+    font-family: Merriweather, serif;
+    font-size: 40px;
+    line-height: 130%;
+    letter-spacing: 0.02em;
+    max-width: 490px;
+    -ms-grid-column-align: end;
+    justify-self: end;
+}
+
+.hero__button {
+    -ms-grid-row: 5;
+    -ms-grid-column: 3;
+    grid-area: btn;
+    max-width: 360px;
+    align-self: flex-end;
+    -ms-grid-column-align: center;
+    justify-self: center;
+    padding: 25px 111px;
+    border-radius: 12px;
+}
+

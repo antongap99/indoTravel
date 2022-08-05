@@ -1,0 +1,66 @@
+.album {
+    padding: 75px 0;
+}
+
+.album__slider {
+    position: relative;
+}
+
+.album__item {
+    width: auto;
+}
+
+.album__left {
+    position: absolute;
+    content: "";
+    width: 90px;
+    height: 90px;
+    top: 50%;
+    left: 130px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: url("../../img/album/left.svg") center/contain no-repeat;
+    z-index: 3;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.album__left:focus {
+    background-color: #AFAFAF;
+}
+
+.album__left:active {
+    -webkit-transform: translateY(-50%) rotate(180deg);
+    -ms-transform: translateY(-50%) rotate(180deg);
+    transform: translateY(-50%) rotate(180deg);
+    background: url("../../img/album/arrow-right-active.svg") center/contain no-repeat;
+}
+
+.album__right {
+    position: absolute;
+    content: "";
+    width: 90px;
+    height: 90px;
+    top: 50%;
+    right: 130px;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    background: url("../../img/album/right.svg") center/contain no-repeat;
+    z-index: 3;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.album__right:focus {
+    background-color: #AFAFAF;
+}
+
+.album__right:active {
+    background: url("../../img/album/arrow-right-active.svg") center/contain no-repeat;
+}
+
+.album__nav_dis {
+    display: none;
+}
