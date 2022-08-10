@@ -13,7 +13,17 @@ z-index: 999;
 
 document.body.append(airPlane);
 
+window.addEventListener('resize', () => {
+   
+    if( document.documentElement.clientWidth <= 758) {
+        airPlane.style.display = 'none';
+    } else {
+        airPlane.style.display = 'block';
+    }
+})
 
+
+    
 const calcPossitionAirPlane = () => {
     const maxDistance = document.documentElement.clientHeight - airPlane.clientHeight;
 
