@@ -25,13 +25,19 @@ const updateReservationData = (reservationData, reservationPrice, price, dateSel
      const secondNumber = dateArray[1].split('.');
      const firstDate = new Date('2022',firstNumber[1] - 1, firstNumber[0]);
      const secondDate = new Date('2022',secondNumber[1] - 1, secondNumber[0]);
-     const monthFirstDate = firstDate.toLocaleString('ru', { month: 'long' });
-     const monthSecondDate = secondDate.toLocaleString('ru', { month: 'long' });
-     const monthFirstDatePubplic = `${monthFirstDate.slice(0, monthFirstDate.length - 1)}` + 'я';
-     const monthSecondDatePubplic = `${monthSecondDate.slice(0, monthSecondDate.length - 1)}` + 'я';
-    
-     reservationData.textContent = `${firstDate.getDate()} ${monthFirstDatePubplic} 
-     - ${secondDate.getDate()} ${monthSecondDatePubplic}, ${peopleSelect.value} ${declOfNum(+peopleSelect.value, ['человек', 'человека', 'человек'])} `
+     let monthFirstDate = firstDate.toLocaleString('ru', { month: 'long' });
+     let monthSecondDate = secondDate.toLocaleString('ru', { month: 'long' });
+     const monthtransform = (month) => {
+        if(month === 'март' ||  month === 'август'){
+            month = month + 'а'
+        } else{
+             month = `${month.slice(0, month.length - 1)}` + 'я';  
+        }
+        return month
+     }
+
+     reservationData.textContent = `${firstDate.getDate()} ${monthtransform(monthFirstDate)} 
+     - ${secondDate.getDate()} ${monthtransform(monthSecondDate)}, ${peopleSelect.value} ${declOfNum(+peopleSelect.value, ['человек', 'человека', 'человек'])} `
 
     reservationPrice.textContent = price;
 }
