@@ -25,7 +25,6 @@ window.addEventListener('resize', () => {
 
     
 const calcPositionAirPlane = (prevScroll) => {
-    console.log('prevScroll: ', prevScroll);
     const maxDistance = document.documentElement.clientHeight - airPlane.clientHeight;
     const maxSroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
 
@@ -34,14 +33,13 @@ const calcPositionAirPlane = (prevScroll) => {
 
             let currentScroll = window.scrollY;
     
-        console.log('1 ', currentScroll);
+
         
     const flyPosition = maxDistance * (persentScroll / 100);
     airPlane.style.transform = `translateY(${-flyPosition}px)`;
 
     if(currentScroll < prevScroll)  {
         airPlane.style.transform += ` rotate(180deg)`;
-         console.log(' airPlane.style.transform: ',  airPlane.style.transform);
       }
 
     return currentScroll;      

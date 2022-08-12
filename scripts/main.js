@@ -7,6 +7,7 @@ const {accaridonControl} = accardion;
 import burger from './modules/burgerMenu.js';
 const{burgerControl} = burger; 
 import './modules/airplane.js';
+import './modules/tours.js';
 
 accaridonControl();
 startTimer();
