@@ -9,6 +9,7 @@ const{burgerControl} = burger;
 import './modules/airplane.js';
 import './modules/tours.js';
 import './modules/reservation.js';
+import './modules/footerForm.js'
 
 accaridonControl();
 startTimer();

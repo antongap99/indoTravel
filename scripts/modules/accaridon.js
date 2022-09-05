@@ -3,8 +3,8 @@ const accaridonControl = () => {
     const travelItems = document.querySelectorAll('.travel__item');
     const titleBtns = document.querySelectorAll('.travel__item-title');
     const textWrapper = document.querySelectorAll('.travel__item-text-wrapper');
-    
-    
+    const accWrapper = document.querySelector('.travel__content')
+    accWrapper.style.minHeight = '600px';
     let heightWrapper = 0;
     textWrapper.forEach((elem) => {
         if(heightWrapper < elem.scrollHeight) {

@@ -9,7 +9,6 @@ const form = document.querySelector('.reservation__form');
 const dateSelect = form.dates;
 const peopleSelect = form.people;
 const reservationData =document.querySelector('.reservation__data');
-console.log('reservationData: ', reservationData);
 const reservationPrice =document.querySelector('.reservation__price');
 
 function declOfNum(number, words) {  
@@ -35,7 +34,7 @@ const updateReservationData = (reservationData, reservationPrice, price, dateSel
         }
         return month
      }
-
+     
      reservationData.textContent = `${firstDate.getDate()} ${monthtransform(monthFirstDate)} 
      - ${secondDate.getDate()} ${monthtransform(monthSecondDate)}, ${peopleSelect.value} ${declOfNum(+peopleSelect.value, ['человек', 'человека', 'человек'])} `
 
@@ -66,4 +65,42 @@ form.addEventListener('change', (e) => {
 
         updateReservationData(reservationData, reservationPrice, price, dateSelect)
     }
+});
+
+
+const sendReserveData = async  (body) => {
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },});
+
+    const data = await response.json();
+    return data;
+}
+
+const renderResponseWindow = () => {
+
+}
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInput = document.getElementById('reservation__name');
+    const phoneInput = document.getElementById('reservation__phone');
+
+    
+    sendReserveData({
+        dates: form.dates.value,
+        people: form.people.value,
+        name: nameInput.value,
+        phone: phoneInput.value,
+        price: reservationPrice,
+        userId: 1,
+      } );
 })
+
+export default {
+    sendReserveData,
+}

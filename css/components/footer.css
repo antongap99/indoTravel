@@ -175,3 +175,11 @@
 .footer__author {
     margin-bottom: 10px;
 }
+
+.postMessage{
+    max-width: 400px;
+    padding: 10px;
+}
+.postMessage__title {
+    margin-bottom: 10px;
+}

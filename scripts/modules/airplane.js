@@ -27,26 +27,29 @@ window.addEventListener('resize', () => {
 const calcPositionAirPlane = (prevScroll) => {
     const maxDistance = document.documentElement.clientHeight - airPlane.clientHeight;
     const maxSroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    
 
     return () => {
         let persentScroll = (window.scrollY * 100) / maxSroll;
+        const flyPosition = maxDistance * (persentScroll / 100);
+        airPlane.style.transform = `translateY(${-flyPosition}px)`; 
 
             let currentScroll = window.scrollY;
-    
 
         
-    const flyPosition = maxDistance * (persentScroll / 100);
-    airPlane.style.transform = `translateY(${-flyPosition}px)`;
+    
 
     if(currentScroll < prevScroll)  {
         airPlane.style.transform += ` rotate(180deg)`;
-      }
+       
+    } else if (currentScroll > prevScroll) {
+        airPlane.style.transform += ` rotate(0deg)`;
+    }   
 
-    return currentScroll;      
+       const currentTransfom =  airPlane.style.transform 
+    return {currentScroll, currentTransfom, flyPosition};      
 
-    }
-  
-      
+    }  
 }
 
 const debounce = (fn, raf = NaN) => {
@@ -54,9 +57,11 @@ const debounce = (fn, raf = NaN) => {
     return () =>{
         if(raf) return;
         raf = requestAnimationFrame(() =>{
-            prevScroll = fn(prevScroll)();
+             const prev = fn(prevScroll)();
+             prevScroll = prev.currentScroll;
             raf = NaN;
         })
+        
     }
 };
 
