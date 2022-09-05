@@ -67,6 +67,33 @@ form.addEventListener('change', (e) => {
     }
 });
 
+const renderResponseWindow = (form) => {
+    const modal  = document.createElement('div');
+    modal.className = `reservation__modal`;
+    
+    const titleModal = document.createElement('h1');
+    titleModal.className = `modal__title`;
+    titleModal.textContent = `Ваша заявка успешно отправлена`
+    
+    const subtitle = document.createElement('p');
+    subtitle.className = `modal__subtitle`;
+    subtitle.textContent = `Наши менеджеры свяжутся с вами в течении 3-х рабочих дней`
+    
+    const modalCircle = document.createElement('div');
+    modalCircle.className = `modal__circle`;
+
+    modalCircle.insertAdjacentHTML( 'afterbegin',`<svg width="47" height="36" viewBox="0 0 47 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.2618 27.8332L4.42849 16.9999L0.817383 20.611L15.2618 35.0554L46.2142 4.10306L42.6031 0.491943L15.2618 27.8332Z" fill="white"/>
+    </svg>    
+    `)
+
+    modal.append(titleModal, subtitle, modalCircle);
+    
+    console.log('form.style: ', form.style);
+    form.innerHTML = modal.innerHTML;
+    
+}
+
 
 const sendReserveData = async  (body) => {
     const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -77,12 +104,13 @@ const sendReserveData = async  (body) => {
         },});
 
     const data = await response.json();
-    return data;
+    const status =  response.ok;
+    if(status){
+        renderResponseWindow(form);
+    }
+    return {data, status};
 }
 
-const renderResponseWindow = () => {
-
-}
 
 
 form.addEventListener('submit', (e) => {
@@ -90,7 +118,6 @@ form.addEventListener('submit', (e) => {
     const nameInput = document.getElementById('reservation__name');
     const phoneInput = document.getElementById('reservation__phone');
 
-    
     sendReserveData({
         dates: form.dates.value,
         people: form.people.value,
@@ -98,7 +125,9 @@ form.addEventListener('submit', (e) => {
         phone: phoneInput.value,
         price: reservationPrice,
         userId: 1,
-      } );
+      } 
+      );      
+    
 })
 
 export default {

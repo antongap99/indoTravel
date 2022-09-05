@@ -193,3 +193,39 @@
     padding: 24px 112px;
     border-radius: 12px;
 }
+
+.reservation__modal {
+    padding: 40px 60px;
+    border: 1px solid #AFAFAF;
+    border-radius: 30px;
+    margin-bottom: 40px;
+    gap: 40px;
+}
+.modal__title{
+    margin-top: 17px;
+    width: 580px;
+    height: 102px;
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 150%;
+    text-align: center;
+}
+.modal__subtitle{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    margin-top: 10px;
+}
+
+.modal__circle{
+    margin-top: 34px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background: #78EC6E;
+    padding: 32px 27px ;
+}
