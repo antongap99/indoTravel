@@ -67,7 +67,7 @@ const dateSelectControl = (dataSelect, data , personSelect ) => {
 
 renderDataTour(dataSelect ,personSelect , data);
 dateSelectControl(dataSelect, data , personSelect);
-console.log(data);
+// console.log(data);
 
 
 export default {

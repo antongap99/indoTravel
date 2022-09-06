@@ -84,15 +84,19 @@ const renderResponseWindowError = (form) => {
     modalBtn.className = `button reservation__button_error`;
     modalBtn.textContent = `Забронировать`;
     modal.append(titleModal, subtitle, modalBtn);
+    const prevForm = form.innerHTML;
     
     console.log('form.style: ', form.style);
     form.innerHTML = modal.innerHTML;
-    
+    return prevForm;
 }
 
 const renderResponseWindowPass = (error, form) => {
     if(error){
-        renderResponseWindowError(form);
+        let prevForm = renderResponseWindowError(form);
+        form.addEventListener('submit', () => {
+            form.innerHTML = prevForm;
+        });
         return;
     }
     const modal  = document.createElement('div');
@@ -116,16 +120,16 @@ const renderResponseWindowPass = (error, form) => {
 
     modal.append(titleModal, subtitle, modalCircle);
     
-    console.log('form.style: ', form.style);
+    console.log('prevForm: ', prevForm);
     form.innerHTML = modal.innerHTML;
-    
+    return prevForm;
 }
 
 
 
 const sendReserveData = async  (body) => {
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+        const response = await fetch('https://jsonplaceholder.typicode.cm/posts', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
@@ -141,30 +145,36 @@ const sendReserveData = async  (body) => {
         throw new Error(response.status);
     }
     } catch (error) {
-        renderResponseWindowPass(error, form);
-    }
-    
-
-    
-    return {data, status};
+    renderResponseWindowPass(error, form);
+    }    
 }
 
-
+const cleaerInnerForm = (form) => {
+    
+}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const nameInput = document.getElementById('reservation__name');
     const phoneInput = document.getElementById('reservation__phone');
+    try {
+        sendReserveData({
+            dates: form.dates.value,
+            people: form.people.value,
+            name: nameInput.value,
+            phone: phoneInput.value,
+            price: reservationPrice,
+            userId: 1,
+        } 
+        );      
 
-    sendReserveData({
-        dates: form.dates.value,
-        people: form.people.value,
-        name: nameInput.value,
-        phone: phoneInput.value,
-        price: reservationPrice,
-        userId: 1,
-      } 
-      );      
+    } catch (error) {
+        console.log(error);
+    }
+   
+    
+
+    
     
 })
 
