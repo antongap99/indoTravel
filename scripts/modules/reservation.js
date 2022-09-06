@@ -93,10 +93,7 @@ const renderResponseWindowError = (form) => {
 
 const renderResponseWindowPass = (error, form) => {
     if(error){
-        let prevForm = renderResponseWindowError(form);
-        form.addEventListener('submit', () => {
-            form.innerHTML = prevForm;
-        });
+        renderResponseWindowError(form);
         return;
     }
     const modal  = document.createElement('div');
@@ -120,38 +117,35 @@ const renderResponseWindowPass = (error, form) => {
 
     modal.append(titleModal, subtitle, modalCircle);
     
-    console.log('prevForm: ', prevForm);
+
     form.innerHTML = modal.innerHTML;
-    return prevForm;
 }
 
 
 
 const sendReserveData = async  (body) => {
     try {
-        const response = await fetch('https://jsonplaceholder.typicode.cm/posts', {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts/', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: {
               'Content-type': 'application/json; charset=UTF-8',
             },});
     
-    if(response.ok){
-        const data = await response.json();
-        renderResponseWindowPass(null, form);
-        
-        return;
-    } else {
-        throw new Error(response.status);
-    }
+        if(response.ok){
+            const data = await response.json();
+            renderResponseWindowPass(null, form);
+            
+            return;
+        } else {
+            throw new Error(response.status);
+        }
     } catch (error) {
-    renderResponseWindowPass(error, form);
+        renderResponseWindowPass(error, form);
     }    
 }
 
-const cleaerInnerForm = (form) => {
-    
-}
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
