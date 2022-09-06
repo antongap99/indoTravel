@@ -204,7 +204,6 @@
 .modal__title{
     margin-top: 17px;
     width: 580px;
-    height: 102px;
     font-family: 'Merriweather';
     font-style: normal;
     font-weight: 400;
@@ -228,4 +227,21 @@
     border-radius: 100px;
     background: #78EC6E;
     padding: 32px 27px ;
+}
+
+.modal__title_error{
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 150%;
+    margin-top: 17px;
+}
+
+.reservation__button_error {
+    margin-top: 34px;
+    width: 360px;
+    height: 76px;
+    padding: 25px 110px;
+    border-radius: 12px;
 }

@@ -67,7 +67,34 @@ form.addEventListener('change', (e) => {
     }
 });
 
-const renderResponseWindow = (form) => {
+
+const renderResponseWindowError = (form) => {
+    const modal  = document.createElement('div');
+    modal.className = `reservation__modal`;
+    
+    const titleModal = document.createElement('h1');
+    titleModal.className = `modal__title_error`;
+    titleModal.textContent = `Упс... Что-то пошло не так`
+    
+    const subtitle = document.createElement('p');
+    subtitle.className = `modal__subtitle`;
+    subtitle.textContent = `Не удалось отправить заявку. Пожалуйста, повторите отправку еще раз`
+    
+    const modalBtn = document.createElement('button');
+    modalBtn.className = `button reservation__button_error`;
+    modalBtn.textContent = `Забронировать`;
+    modal.append(titleModal, subtitle, modalBtn);
+    
+    console.log('form.style: ', form.style);
+    form.innerHTML = modal.innerHTML;
+    
+}
+
+const renderResponseWindowPass = (error, form) => {
+    if(error){
+        renderResponseWindowError(form);
+        return;
+    }
     const modal  = document.createElement('div');
     modal.className = `reservation__modal`;
     
@@ -95,19 +122,30 @@ const renderResponseWindow = (form) => {
 }
 
 
-const sendReserveData = async  (body) => {
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },});
 
-    const data = await response.json();
-    const status =  response.ok;
-    if(status){
-        renderResponseWindow(form);
+const sendReserveData = async  (body) => {
+    try {
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+            method: 'POST',
+            body: JSON.stringify(body),
+            headers: {
+              'Content-type': 'application/json; charset=UTF-8',
+            },});
+    
+    if(response.ok){
+        const data = await response.json();
+        renderResponseWindowPass(null, form);
+        
+        return;
+    } else {
+        throw new Error(response.status);
     }
+    } catch (error) {
+        renderResponseWindowPass(error, form);
+    }
+    
+
+    
     return {data, status};
 }
 
