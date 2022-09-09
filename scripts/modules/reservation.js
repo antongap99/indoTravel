@@ -10,6 +10,8 @@ const dateSelect = form.dates;
 const peopleSelect = form.people;
 const reservationData =document.querySelector('.reservation__data');
 const reservationPrice =document.querySelector('.reservation__price');
+const nameInput = document.getElementById('reservation__name');
+const phoneInput = document.getElementById('reservation__phone');
 
 function declOfNum(number, words) {  
     return words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? Math.abs(number) % 10 : 5]];
@@ -110,7 +112,7 @@ const renderResponseWindowPass = (error, form) => {
     const modalCircle = document.createElement('div');
     modalCircle.className = `modal__circle`;
 
-    modalCircle.insertAdjacentHTML( 'afterbegin',`<svg width="47" height="36" viewBox="0 0 47 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    modalCircle.insertAdjacentHTML( 'afterbegin',`<svg class = 'circle__svg' width="47" height="36" viewBox="0 0 47 36" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15.2618 27.8332L4.42849 16.9999L0.817383 20.611L15.2618 35.0554L46.2142 4.10306L42.6031 0.491943L15.2618 27.8332Z" fill="white"/>
     </svg>    
     `)
@@ -146,11 +148,21 @@ const sendReserveData = async  (body) => {
 }
 
 
+const btnReserve = document.querySelector('.reservation__button');
+form.addEventListener('change', (e) => {
+    if(dateSelect.options[dateSelect.options.selectedIndex].textContent !== 'Дата путешествия' && 
+        peopleSelect.options[peopleSelect.options.selectedIndex].textContent !== 'Количество человек' 
+        && nameInput.value !== ''  && phoneInput.value !== '') {
+            btnReserve.removeAttribute('disabled');
+        } else {
+            btnReserve.setAttribute('disabled', '');
+    };
+  })
+
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const nameInput = document.getElementById('reservation__name');
-    const phoneInput = document.getElementById('reservation__phone');
+    
     try {
         sendReserveData({
             dates: form.dates.value,
