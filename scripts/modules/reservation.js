@@ -4,7 +4,8 @@ const {
     data, 
     renderDataTour,
 } = tours;
-
+import scroll from './getScrollbarSize.js'
+const  {getScrollbarWidth} = scroll;
 const form = document.querySelector('.reservation__form');
 const dateSelect = form.dates;
 const peopleSelect = form.people;
@@ -12,30 +13,72 @@ const reservationData =document.querySelector('.reservation__data');
 const reservationPrice =document.querySelector('.reservation__price');
 const nameInput = document.getElementById('reservation__name');
 const phoneInput = document.getElementById('reservation__phone');
+const cssStyleHash = new Map();
+const scrollbarWidth = getScrollbarWidth();
+
 
 function declOfNum(number, words) {  
     return words[(number % 100 > 4 && number % 100 < 20) ? 2 : [2, 0, 1, 1, 1, 2][(number % 10 < 5) ? Math.abs(number) % 10 : 5]];
 }
 // reservationData.textContent = ``
+
+const loadCss = (url) => {
+    if(cssStyleHash.has(url)) {
+        return cssStyleHash.get(url);
+    }
+    const stylePromise =  new Promise((resolve) => {
+        const link = document.createElement('link');
+        link.rel = `stylesheet`;
+        link.href = url;
+        document.head.append(link);
+
+        link.addEventListener('load', () => {
+            resolve();
+        });
+    });
+
+    cssStyleHash.set(url, stylePromise);
+    return stylePromise;
+}
+
+const distructureStringMonth = (dateArray) => {
+    const firstNumber = dateArray[0].split('.');
+    const secondNumber = dateArray[1].split('.');
+    const firstDate = new Date('2022',firstNumber[1] - 1, firstNumber[0]);
+    const secondDate = new Date('2022',secondNumber[1] - 1, secondNumber[0]);
+    let monthFirstDate = firstDate.toLocaleString('ru', { month: 'long' });
+    let monthSecondDate = secondDate.toLocaleString('ru', { month: 'long' });
+    return {
+        firstNumber,
+        secondNumber,
+        firstDate,
+        secondDate,
+        monthFirstDate,
+        monthSecondDate,
+    }
+}
+
+
+const monthtransform = (month) => {
+    if(month === 'март' ||  month === 'август'){
+        month = month + 'а'
+    } else{
+         month = `${month.slice(0, month.length - 1)}` + 'я';  
+    }
+    return month
+ }  
+
+
 const updateReservationData = (reservationData, reservationPrice, price, dateSelect) => {
     const dateArray = dateSelect.value.split('-');
-    dateArray.map((elem) => {
-        elem.split('');
-    });
-     const firstNumber = dateArray[0].split('.');
-     const secondNumber = dateArray[1].split('.');
-     const firstDate = new Date('2022',firstNumber[1] - 1, firstNumber[0]);
-     const secondDate = new Date('2022',secondNumber[1] - 1, secondNumber[0]);
-     let monthFirstDate = firstDate.toLocaleString('ru', { month: 'long' });
-     let monthSecondDate = secondDate.toLocaleString('ru', { month: 'long' });
-     const monthtransform = (month) => {
-        if(month === 'март' ||  month === 'август'){
-            month = month + 'а'
-        } else{
-             month = `${month.slice(0, month.length - 1)}` + 'я';  
-        }
-        return month
-     }
+
+    const {
+        firstDate,
+        secondDate,
+        monthFirstDate,
+        monthSecondDate,} = distructureStringMonth(dateArray);
+
+    
      
      reservationData.textContent = `${firstDate.getDate()} ${monthtransform(monthFirstDate)} 
      - ${secondDate.getDate()} ${monthtransform(monthSecondDate)}, ${peopleSelect.value} ${declOfNum(+peopleSelect.value, ['человек', 'человека', 'человек'])} `
@@ -52,22 +95,12 @@ const calcTourPrice = ( target) => {
     data.forEach(elem => {
 
         if(elem.date === dateSelect.value) {
-            price = +target.value* elem.price;
-           
+            price = +target.value* elem.price;  
         }
     });
 
     return price;
 }
-
-
-form.addEventListener('change', (e) => {
-    if(e.target.matches('#reservation__people')){
-        const price = calcTourPrice(e.target);
-
-        updateReservationData(reservationData, reservationPrice, price, dateSelect)
-    }
-});
 
 
 const renderResponseWindowError = (form) => {
@@ -88,16 +121,17 @@ const renderResponseWindowError = (form) => {
     modal.append(titleModal, subtitle, modalBtn);
     const prevForm = form.innerHTML;
     
-    console.log('form.style: ', form.style);
     form.innerHTML = modal.innerHTML;
     return prevForm;
 }
 
-const renderResponseWindowPass = (error, form) => {
+const renderResponseWindowPass = async (error, form) => {
     if(error){
         renderResponseWindowError(form);
         return;
-    }
+    };
+
+    await loadCss('./css/components/reservationResponse.css');
     const modal  = document.createElement('div');
     modal.className = `reservation__modal`;
     
@@ -118,14 +152,12 @@ const renderResponseWindowPass = (error, form) => {
     `)
 
     modal.append(titleModal, subtitle, modalCircle);
-    
-
     form.innerHTML = modal.innerHTML;
 }
 
 
 
-const sendReserveData = async  (body) => {
+const sendReserveData = async  (body, callback) => {
     try {
         const response = await fetch('https://jsonplaceholder.typicode.com/posts/', {
             method: 'POST',
@@ -135,21 +167,26 @@ const sendReserveData = async  (body) => {
             },});
     
         if(response.ok){
-            const data = await response.json();
-            renderResponseWindowPass(null, form);
+            // const data = await response.json();
+            callback(null, form);
             
             return;
         } else {
             throw new Error(response.status);
         }
     } catch (error) {
-        renderResponseWindowPass(error, form);
+        callback(error, form);
     }    
 }
 
 
 const btnReserve = document.querySelector('.reservation__button');
 form.addEventListener('change', (e) => {
+    if(e.target.matches('#reservation__people')){
+        const price = calcTourPrice(e.target);
+
+        updateReservationData(reservationData, reservationPrice, price, dateSelect)
+    }
     if(dateSelect.options[dateSelect.options.selectedIndex].textContent !== 'Дата путешествия' && 
         peopleSelect.options[peopleSelect.options.selectedIndex].textContent !== 'Количество человек' 
         && nameInput.value !== ''  && phoneInput.value !== '') {
@@ -160,29 +197,89 @@ form.addEventListener('change', (e) => {
   })
 
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
+
+
+
+const loadmodalHtml = (formData) => {
+    const {
+        dates,
+        people,
+        price }  = formData;
+
+    const  {
+        firstDate,
+        secondDate,
+        monthFirstDate,
+        monthSecondDate,}  = distructureStringMonth(dates.split('-'));
+
+
+   const modalForm = document.createElement('divs');
+   modalForm.innerHTML =   `<div class="overlay overlay_confirm">
+    <form class="modal">
+      <h2 class="modal__title">Подтверждение заявки</h2>
+      <p class="modal__text">Бронирование путешествия в Индию на ${people} ${declOfNum(+people, ['человек', 'человека', 'человек'])}</p>
+      <p class="modal__text">В даты: ${firstDate.getDate()} ${monthtransform(monthFirstDate)}  - ${secondDate.getDate()}  ${monthtransform(monthSecondDate)}</p>
+      <p class="modal__text">Стоимость тура ${price}</p>
+      <div class="modal__button">
+        <button class="modal__btn modal__btn_confirm">Подтверждаю</button>
+        <button class="modal__btn modal__btn_edit">Изменить данные</button>
+      </div>
+    </form>
+  </div>`;
+  document.body.style.overflowY = 'hidden';
+  document.body.style.paddingRight = `${scrollbarWidth}px`
+  document.body.append(modalForm);
+  return modalForm;
+}
+
+
+const modalClose = (elem) => {
+    elem.remove();
+}
+
+form.addEventListener('submit', async (e) => {
     
-    try {
-        sendReserveData({
+
+    e.preventDefault();
+    const overlay =  loadmodalHtml({
             dates: form.dates.value,
             people: form.people.value,
             name: nameInput.value,
             phone: phoneInput.value,
-            price: reservationPrice,
-            userId: 1,
-        } 
-        );      
+            price: reservationPrice.textContent,
+        })
 
-    } catch (error) {
-        console.log(error);
-    }
-   
-    
+    await loadCss('./css/components/modal.css');
 
-    
-    
-})
+    const modal = document.querySelector('.modal')
+    const modal__btn_edit = document.querySelector('.modal__btn_edit');
+    modal.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+            try {
+                sendReserveData({
+                    dates: form.dates.value,
+                    people: form.people.value,
+                    name: nameInput.value,
+                    phone: phoneInput.value,
+                    price: reservationPrice.textContent,
+                    userId: 1,
+                }, renderResponseWindowPass
+                ).then(modalClose(overlay));
+        
+            } catch (error) {
+                console.log(error);
+            }
+             
+    });
+    modal__btn_edit.addEventListener('click', () => {
+        modalClose(overlay);  
+    })
+});
+
+
+
+
 
 export default {
     sendReserveData,

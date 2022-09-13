@@ -1,0 +1,74 @@
+.reservation__modal {
+    padding: 40px 60px;
+    border: 1px solid #AFAFAF;
+    border-radius: 30px;
+    margin-bottom: 40px;
+    gap: 40px;
+}
+.modal__title{
+    margin-top: 17px;
+    width: 580px;
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 150%;
+    text-align: center;
+}
+.modal__subtitle{
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    margin-top: 10px;
+}
+
+.modal__circle{
+    margin-top: 34px;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background: #78EC6E;
+    padding: 32px 27px ;
+}
+
+.modal__title_error{
+    font-family: 'Merriweather';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 34px;
+    line-height: 150%;
+    margin-top: 17px;
+}
+
+.reservation__button_error {
+    margin-top: 34px;
+    width: 360px;
+    height: 76px;
+    padding: 25px 110px;
+    border-radius: 12px;
+}
+
+
+@media (max-width: 760px){
+
+    .modal__title {
+        font-size: 14px;
+    }
+    .modal__subtitle {
+        font-size: 12px;
+        text-align: center;
+    }
+    .modal__circle{
+        width: 50px;
+        height: 50px;
+        border-radius: 25px;
+        padding: 15px 13px ;
+    }
+
+    .circle__svg{
+        width: 25px;
+        height: 18px;
+    }
+}
