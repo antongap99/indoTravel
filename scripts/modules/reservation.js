@@ -68,6 +68,15 @@ const monthtransform = (month) => {
     return month
  }  
 
+ const ScrollBarControl = (bool) => {
+    if(!bool){
+        document.body.style.overflowY = 'hidden';
+        document.body.style.paddingRight = `${scrollbarWidth}px`
+    } else {
+        document.body.style.overflowY = '';
+        document.body.style.paddingRight = ''
+    }
+ }
 
 const updateReservationData = (reservationData, reservationPrice, price, dateSelect) => {
     const dateArray = dateSelect.value.split('-');
@@ -226,8 +235,8 @@ const loadmodalHtml = (formData) => {
       </div>
     </form>
   </div>`;
-  document.body.style.overflowY = 'hidden';
-  document.body.style.paddingRight = `${scrollbarWidth}px`
+  ScrollBarControl(false);
+  
   document.body.append(modalForm);
   return modalForm;
 }
@@ -270,10 +279,11 @@ form.addEventListener('submit', async (e) => {
             } catch (error) {
                 console.log(error);
             }
-             
+            ScrollBarControl(true)
     });
     modal__btn_edit.addEventListener('click', () => {
         modalClose(overlay);  
+        ScrollBarControl(true)
     })
 });
 
