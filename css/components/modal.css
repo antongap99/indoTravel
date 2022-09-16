@@ -18,23 +18,23 @@
   padding: 60px;
 }
 
-.modal__title {
+.confirmtitle {
   margin: 0 auto 50px;
 }
 
-.modal__text {
+.confirm_text {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.modal__button {
+.confirmutton {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 40px;
 }
 
-.modal__btn {
+.confirm__btn {
   padding: 16px 40px;
   border-radius: 12px;
   font-size: 18px;
@@ -44,19 +44,19 @@
   border: 2px solid transparent;
 }
 
-.modal__btn_edit {
+.confirm_edit {
   background-color: #fc8900;
 }
 
-.modal__btn:hover {
+.confirm__btn:hover {
   background-color: #ffbbaa;
 }
 
-.modal__btn:active {
+.confirm__btn:active {
   transform: translate(2px, 2px);
 }
 
-.modal__btn:focus {
+.confirm__btn:focus {
   outline: 1px solid #FCB500;
   outline-offset: 5px;
 }

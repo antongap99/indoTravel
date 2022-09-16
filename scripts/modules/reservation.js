@@ -222,16 +222,16 @@ const loadmodalHtml = (formData) => {
         monthSecondDate,}  = distructureStringMonth(dates.split('-'));
 
 
-   const modalForm = document.createElement('divs');
+   const modalForm = document.createElement('div');
    modalForm.innerHTML =   `<div class="overlay overlay_confirm">
-    <form class="modal">
-      <h2 class="modal__title">Подтверждение заявки</h2>
-      <p class="modal__text">Бронирование путешествия в Индию на ${people} ${declOfNum(+people, ['человек', 'человека', 'человек'])}</p>
-      <p class="modal__text">В даты: ${firstDate.getDate()} ${monthtransform(monthFirstDate)}  - ${secondDate.getDate()}  ${monthtransform(monthSecondDate)}</p>
-      <p class="modal__text">Стоимость тура ${price}</p>
-      <div class="modal__button">
-        <button class="modal__btn modal__btn_confirm">Подтверждаю</button>
-        <button class="modal__btn modal__btn_edit">Изменить данные</button>
+    <form class="modal modal__сonfirm">
+      <h2 class="confirm__title">Подтверждение заявки</h2>
+      <p class="confirm">Бронирование путешествия в Индию на ${people} ${declOfNum(+people, ['человек', 'человека', 'человек'])}</p>
+      <p class="confirm">В даты: ${firstDate.getDate()} ${monthtransform(monthFirstDate)}  - ${secondDate.getDate()}  ${monthtransform(monthSecondDate)}</p>
+      <p class="confirm">Стоимость тура ${price}</p>
+      <div class="confirm">
+        <button class="confirm confirm">Подтверждаю</button>
+        <button class="confirm confirm">Изменить данные</button>
       </div>
     </form>
   </div>`;
@@ -261,7 +261,8 @@ form.addEventListener('submit', async (e) => {
     await loadCss('./css/components/modal.css');
 
     const modal = document.querySelector('.modal')
-    const modal__btn_edit = document.querySelector('.modal__btn_edit');
+    const confirmBtnEdit = document.querySelector('.confirm__btn_edit');
+    console.log('confirmBtnEdit: ', confirmBtnEdit);
     modal.addEventListener('submit', (e) => {
         e.preventDefault();
 
@@ -281,7 +282,7 @@ form.addEventListener('submit', async (e) => {
             }
             ScrollBarControl(true)
     });
-    modal__btn_edit.addEventListener('click', () => {
+    confirmBtnEdit.addEventListener('click', () => {
         modalClose(overlay);  
         ScrollBarControl(true)
     })
