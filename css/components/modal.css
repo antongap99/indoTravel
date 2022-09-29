@@ -18,16 +18,17 @@
   padding: 60px;
 }
 
-.confirmtitle {
+.confirm__title {
+  max-width: 325px;
   margin: 0 auto 50px;
 }
 
-.confirm_text {
+.confirm__text {
   text-align: center;
   margin-bottom: 40px;
 }
 
-.confirmutton {
+.confirm__button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,7 +45,7 @@
   border: 2px solid transparent;
 }
 
-.confirm_edit {
+.confirm__btn_edit {
   background-color: #fc8900;
 }
 

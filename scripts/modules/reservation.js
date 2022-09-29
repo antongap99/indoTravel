@@ -198,14 +198,20 @@ form.addEventListener('change', (e) => {
     }
     if(dateSelect.options[dateSelect.options.selectedIndex].textContent !== 'Дата путешествия' && 
         peopleSelect.options[peopleSelect.options.selectedIndex].textContent !== 'Количество человек' 
-        && nameInput.value !== ''  && phoneInput.value !== '') {
+        && nameInput.value !== ''  && phoneInput.value !== '' && nameInput.value.split(/ /g).length >=3) {
             btnReserve.removeAttribute('disabled');
         } else {
             btnReserve.setAttribute('disabled', '');
     };
   })
 
+  form.addEventListener('input', () => {
+    const input = document.querySelector('.reservation__input_name');
+    input.value = input.value.replace(/[0-9A-Z_-]/gi, '');
 
+    const reservationPhone = document.querySelector('#reservation__phone');
+    reservationPhone.value = reservationPhone.value.replace(/[^+0-9]/gi, '');
+  })
 
 
 
@@ -226,16 +232,27 @@ const loadmodalHtml = (formData) => {
    modalForm.innerHTML =   `<div class="overlay overlay_confirm">
     <form class="modal modal__сonfirm">
       <h2 class="confirm__title">Подтверждение заявки</h2>
-      <p class="confirm">Бронирование путешествия в Индию на ${people} ${declOfNum(+people, ['человек', 'человека', 'человек'])}</p>
-      <p class="confirm">В даты: ${firstDate.getDate()} ${monthtransform(monthFirstDate)}  - ${secondDate.getDate()}  ${monthtransform(monthSecondDate)}</p>
-      <p class="confirm">Стоимость тура ${price}</p>
-      <div class="confirm">
-        <button class="confirm confirm">Подтверждаю</button>
-        <button class="confirm confirm">Изменить данные</button>
+      <p class="confirm__text">Бронирование путешествия в Индию на ${people} ${declOfNum(+people, ['человек', 'человека', 'человек'])}</p>
+      <p class="confirm__text">В даты: ${firstDate.getDate()} ${monthtransform(monthFirstDate)}  - ${secondDate.getDate()}  ${monthtransform(monthSecondDate)}</p>
+      <p class="confirm__text">Стоимость тура ${price}</p>
+      <div class="confirm__button">
+        <button class="confirm confirm__btn">Подтверждаю</button>
+        <button class="confirm confirm__btn confirm__btn_edit">Изменить данные</button>
       </div>
     </form>
   </div>`;
   ScrollBarControl(false);
+/*<form class="modal">
+      <h2 class="modal__title">Подтверждение заявки</h2>
+      <p class="modal__text">Бронирование путешествия в Индию на ${people} ${declOfNum(+people, ['человек', 'человека', 'человек'])}</p>
+      <p class="modal__text">В даты: ${firstDate.getDate()} ${monthtransform(monthFirstDate)}  - ${secondDate.getDate()}  ${monthtransform(monthSecondDate)}</p>
+      <p class="modal__text">Стоимость тура ${price}</p>
+      <div class="modal__button">
+        <button class="modal__btn modal__btn_confirm">Подтверждаю</button>
+        <button class="modal__btn modal__btn_edit">Изменить данные</button>
+      </div>
+    </form>
+  </div>`;czc*/
   
   document.body.append(modalForm);
   return modalForm;
@@ -247,9 +264,11 @@ const modalClose = (elem) => {
 }
 
 form.addEventListener('submit', async (e) => {
-    
-
     e.preventDefault();
+    words = nameInput.value.split(/ /g);
+    if(words.length <= 3){
+        return;
+    }
     const overlay =  loadmodalHtml({
             dates: form.dates.value,
             people: form.people.value,
@@ -262,7 +281,6 @@ form.addEventListener('submit', async (e) => {
 
     const modal = document.querySelector('.modal')
     const confirmBtnEdit = document.querySelector('.confirm__btn_edit');
-    console.log('confirmBtnEdit: ', confirmBtnEdit);
     modal.addEventListener('submit', (e) => {
         e.preventDefault();
 
