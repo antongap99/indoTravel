@@ -10,7 +10,14 @@ import './modules/airplane.js';
 import './modules/tours.js';
 import './modules/reservation.js';
 import './modules/footerForm.js'
+import sliderController from './modules/slider.js'
 
-accaridonControl();
-startTimer();
-burgerControl();    
+
+const init = () => {
+    accaridonControl();
+    startTimer();
+    burgerControl();
+    sliderController();
+}
+
+init();
