@@ -9,7 +9,7 @@ const burgerControl = () => {
         startTime ||= timestamp;
 
         const progress = (timestamp - startTime) / durationOpacity;
-    // debugger;
+
         if(!headerMenu.classList.contains('header__menu_active')){
             headerMenu.style.opacity = progress;
             if(progress < 1) {
@@ -18,7 +18,7 @@ const burgerControl = () => {
                 headerMenu.style.opacity = 1;
                 cancelAnimationFrame(hideId);
                 headerMenu.classList.toggle('header__menu_active');
-            }    
+            }
         } else {
             headerMenu.style.opacity = 1 - progress;
 
@@ -28,12 +28,12 @@ const burgerControl = () => {
                 headerMenu.style.opacity = 0;
                 cancelAnimationFrame(hideId);
                 headerMenu.classList.toggle('header__menu_active');
-            }    
+            }
         }
-           
+
     }
 
-    
+
 
 
     burgerBtn.addEventListener('click', () => {
@@ -42,14 +42,14 @@ const burgerControl = () => {
             toggleBurger(timestamp);
        })
         // headerMenu.classList.toggle('header__menu_active');
-        
+
     })
 
     document.addEventListener('click', (e) => {
-        if(((!e.target.matches('.header__menu') && !e.target.matches('.header__list')) && 
+        if(((!e.target.matches('.header__menu') && !e.target.matches('.header__list')) &&
         !e.target.matches('.header__menu-button')
         && headerMenu.classList.contains('header__menu_active')) || e.target.matches('.header__item') ){
-            
+
             requestAnimationFrame((timestamp) => {
                 startTime = NaN;
                 toggleBurger(timestamp);

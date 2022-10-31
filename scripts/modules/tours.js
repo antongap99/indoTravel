@@ -1,8 +1,6 @@
 const dataSelect = document.querySelector('#tour__date');
 const personSelect = document.querySelector('#tour__people');
 
-
-
 const loudFormData = async () => {
     const response = await fetch('./data/db.json');
     const data = await response.json();
@@ -42,13 +40,11 @@ const renderDataTour = async ( dataSelect ,personSelect , data) => {
 }
 
 
-
-
 const dateSelectControl = (dataSelect, data , personSelect ) => {
     dataSelect.addEventListener('change', (e) => {
         let target = e.target;
         removePersonSelect(personSelect);
-        
+
     data.forEach((elem) => {
         if(target.value === elem.date){
             for(let i = elem['min-people']; i <= elem['max-people']; i++ )
@@ -57,11 +53,6 @@ const dateSelectControl = (dataSelect, data , personSelect ) => {
     })
 })
 }
-
-
-
-
-
 
 
 
