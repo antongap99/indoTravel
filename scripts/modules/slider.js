@@ -6,7 +6,7 @@ const sliderController = () => {
         },
         navigation: {
           nextEl: '.album__right',
-          prevEl: '.album__left', 
+          prevEl: '.album__left',
         },
         direction: 'horizontal',
     });

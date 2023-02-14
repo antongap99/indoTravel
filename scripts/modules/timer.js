@@ -15,10 +15,8 @@ const createTimer = () => {
 }
 
 
-
-
 const timer = (deadline , timerWrapper) => {
-    
+
 
 
     const timerCountDays = document.querySelector('.timer__count_days');
@@ -39,7 +37,7 @@ const timer = (deadline , timerWrapper) => {
         const hours = Math.floor(timeRemaining / 1000/ 60 / 60 % 24);
         const days = Math.floor(timeRemaining / 1000 / 60 / 60 / 24);
         const seconds = Math.floor(timeRemaining / 1000 % 60);
-        
+
 
         return {
             timeRemaining,
@@ -64,11 +62,11 @@ const timer = (deadline , timerWrapper) => {
         timerCountHours.textContent = timer.hours;
         timerCountMinutes.textContent = timer.minutes;
 
-        
+
 
          const unitDayModify = ( ) => {
             if((timer.days === 1 ||
-                 timer.days % 10  === 1 || 
+                 timer.days % 10  === 1 ||
                  timer.days % 100 === 1 ||
                  timer.days % 1000 === 1 ) &&  Math.floor(timer.days) / 10 !== 1
                  ) {
@@ -81,15 +79,15 @@ const timer = (deadline , timerWrapper) => {
 
         }
         const unitHourModify = ( ) => {
-            if((timer.hours === 1 || 
+            if((timer.hours === 1 ||
                 timer.hours % 10 === 1) && Math.floor(timer.hours / 10) !== 1 ) {
 
                 timerUnitsHours.textContent = 'час'
-            }else if ((1 < timer.hours && timer.hours < 5 
+            }else if ((1 < timer.hours && timer.hours < 5
                 || 1 < timer.hours % 10 && timer.hours  % 10 < 5) &&  Math.floor(timer.hours / 10) !== 1) {
                 timerUnitsHours.textContent = 'часа';
-            } else if ( timer.hours >= 5 || 
-                 timer.hours % 10 >= 5 || 
+            } else if ( timer.hours >= 5 ||
+                 timer.hours % 10 >= 5 ||
                  timer.hours === 0 ||
                  timer.hours % 10 === 0
                  ) {
@@ -97,41 +95,41 @@ const timer = (deadline , timerWrapper) => {
             }
         }
         const unitMinuteModify = ( ) => {
-            if((timer.minutes === 1 
+            if((timer.minutes === 1
                 || timer.minutes % 10 === 1) &&
                 Math.floor(timer.minutes / 10) !== 1
             ) {
                 timerUnitsMinutes.textContent = 'минута'
-            }else if ((1 < timer.minutes &&  timer.minutes < 5 
-                || 1 < timer.minutes  % 10  &&  timer.minutes % 10 < 5) && 
+            }else if ((1 < timer.minutes &&  timer.minutes < 5
+                || 1 < timer.minutes  % 10  &&  timer.minutes % 10 < 5) &&
             (Math.floor(timer.minutes / 10) !== 1) ) {
 
                 timerUnitsMinutes.textContent = 'минуты';
-            } else if ( timer.minutes >= 5 
-                || timer.minutes % 10 >= 5 
+            } else if ( timer.minutes >= 5
+                || timer.minutes % 10 >= 5
                 || timer.minutes === 0
                 || timer.minutes % 10 === 0
-                
+
                 ) {
                 timerUnitsMinutes.textContent = 'минут';
             }
         }
         const unitSecondModify = () => {
-            if((timer.seconds === 1 
+            if((timer.seconds === 1
                 || timer.seconds % 10 === 1) &&
                 Math.floor(timer.seconds / 10) !== 1
             ) {
                 timerUnitsMinutes.textContent = 'секунда'
-            }else if ((1 < timer.seconds &&  timer.seconds < 5 
-                || 1 < timer.seconds  % 10  &&  timer.seconds % 10 < 5) && 
+            }else if ((1 < timer.seconds &&  timer.seconds < 5
+                || 1 < timer.seconds  % 10  &&  timer.seconds % 10 < 5) &&
             (Math.floor(timer.seconds / 10) !== 1) ) {
 
                 timerUnitsMinutes.textContent = 'секунды';
-            } else if ( timer.seconds >= 5 
-                || timer.seconds % 10 >= 5 
+            } else if ( timer.seconds >= 5
+                || timer.seconds % 10 >= 5
                 || timer.seconds === 0
                 || timer.seconds % 10 === 0
-                
+
                 ) {
                 timerUnitsMinutes.textContent = 'секунд';
             }
@@ -147,21 +145,21 @@ const timer = (deadline , timerWrapper) => {
 
                 timerCountHours.classList.add('zeroday', 'zeroday_count_minutes');
                 timerUnitsHours.classList.add('zeroday', 'zeroday_unit_minutes');
-                
+
                 timerCountMinutes.classList.add('zeroday', 'zeroday_count_seconds');
                 timerUnitsMinutes.classList.add('zeroday', 'zeroday_unit_seconds');
 
 
                 timerCountDays.textContent = timerCountHours.textContent;
                 timerUnitsDays.textContent = timerUnitsHours.textContent;
-                timerCountHours.textContent = timerCountMinutes.textContent; 
-                timerUnitsHours.textContent = timerUnitsMinutes.textContent; 
-                timerCountMinutes.textContent = timer.seconds; 
-                timerUnitsMinutes.textContent = 'секунд'; 
+                timerCountHours.textContent = timerCountMinutes.textContent;
+                timerUnitsHours.textContent = timerUnitsMinutes.textContent;
+                timerCountMinutes.textContent = timer.seconds;
+                timerUnitsMinutes.textContent = 'секунд';
                 unitSecondModify();
             }
         }
-        
+
         timerFormatToggle();
         const intervalId = setTimeout(startTimeRemaining, 1000);
 
@@ -175,12 +173,12 @@ const timer = (deadline , timerWrapper) => {
 
 
             removeTimer(timerWrapper);
-            
+
          }
-        
+
      }
 
-    
+
 
     startTimeRemaining();
 }
@@ -192,7 +190,7 @@ const startTimer = () => {
     try {
         timer(timerWrapper.dataset.timerDeadline, timerWrapper);
     } catch (error) {
-        
+
     }
 }
 
